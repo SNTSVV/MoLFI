@@ -1,16 +1,19 @@
 # MoLFI
 Multi-objective Log message Format Identification
 
-MoLFI is implemented as a python project (v3.6.0).
+MoLFI is a tool implementing a search-based approach to solve the problem of log message format identification.
+More details on this approach is available in this paper:
 
-The problem of log message format identification is presented as a multi-objective problem.
+> Salma Messaoudi, Annibale Panichella, Domenico Bianculli, Lionel Briand, and Raimondas Sasnauskas. __A Search-based Approach for Accurate Identification of Log Message Formats__. In Proceedings of ICPC ’18: 26th IEEE/ACM International Conference on Program Comprehension (ICPC ’18).  Available online at http://hdl.handle.net/10993/35286
+
+
 A log message template is a two parts message; one fixed and one variable.
 
-For example: "File config.xml sent at 191.168.1.3"
+     For example: "File config.xml sent at 191.168.1.3"
 
-"File", "sent" and "at" are the fixed part because the represent an event of sending a file.
+     "File", "sent" and "at" are the fixed part because the represent an event of sending a file.
 
-"config.xml" and "191.168.1.3" are the variable part because they change with the occurrence of the sending event.
+     "config.xml" and "191.168.1.3" are the variable part because they change with the occurrence of the sending event.
 
 MoLFI uses an evolutionary approach based on NSGA-II to solve this problem.
 
@@ -19,6 +22,8 @@ MoLFI applies the following steps:
 1. Pre-processing the log file (detect trivial variable parts using domain knowledge).
 1. Run NSGA-II algorithm.
 1. Post-processing: apply corrections to the resulting solutions.
+
+MoLFI is implemented as a python project (v3.6.0).
 
 This package contains the source code of the tool with two executable scripts.
 
