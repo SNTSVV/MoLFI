@@ -44,10 +44,11 @@ To run MoLFI on a single log file:
 
 - from the command line, run the MoLFI.py script and precise the following arguments:
 *  -l : specify the log file
-*  -f : specify the log format (e.g., "<timestamp> <level> <message>")
+*  -f : specify the log format (e.g., `"<timestamp> <level> <message>"`)
 *  -p : specify where to save the generated templates.
 *  -r : provide the regular expressions if any (one after the other, separated by a normal space)
 
 Example:
-
+```shell script
 python3 MoLFI.py -l ../MoLFI_experiments/Datasets/BGL/2K/BGL_2K_log_messages.txt -f "<message>" -p templates.pkl -r "core\.[0-9]*" "0x([a-zA-Z]|[0-9])+"
+```
