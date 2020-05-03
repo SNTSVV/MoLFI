@@ -1,4 +1,6 @@
-# MoLFI
+[![Build Status](https://travis-ci.org/donghwan-shin/MoLFI.svg?branch=master)](https://travis-ci.org/donghwan-shin/MoLFI)
+
+# MoLFI 
 Multi-objective Log message Format Identification
 
 MoLFI is a tool implementing a search-based approach to solve the problem of log message format identification.
