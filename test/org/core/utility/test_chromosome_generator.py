@@ -19,7 +19,7 @@ class Test(unittest.TestCase):
         file.close()
 
     def test_load_log_message(self):
-        chrom_gen = ChromosomeGenerator(self.logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(self.logfile, '<message>', [])
         msg = Message(['Write', 'data', 'conf', 'to ', 'file', 'ABC'])
         chrom_gen.load_log_message(msg)
         self.assertEqual(len(chrom_gen.messages.keys()), 2)
@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
     def test_constructor(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
         regex = []
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', regex)
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', regex)
         self.assertEqual(len(chrom_gen.messages.keys()), 4)
         self.assertEqual(len(chrom_gen.messages[3]), 7)
         self.assertEqual(len(chrom_gen.messages[7]), 1)
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
 
     def test_generate_template_from_line(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', [])
         template = chrom_gen.generate_template_from_line(3, 0)
         message = chrom_gen.messages[3][0]
         for index in range(0, message.get_length()):
@@ -46,7 +46,7 @@ class Test(unittest.TestCase):
 
     def test_generate_template_from_line2(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', [])
         m = Message(["======================="])
         messages = {1:[m]}
         chrom_gen.messages = messages
@@ -54,14 +54,14 @@ class Test(unittest.TestCase):
         self.assertEqual(template.token, ['======================='])
 
     def test_one_template_100_cov(self):
-        chrom_gen = ChromosomeGenerator(self.logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(self.logfile, '<message>', [])
         chromosome = chrom_gen.generate_100cov_chromosome()
         self.assertEqual(chromosome.number_of_clusters(), 1)
         self.assertEqual(len(chromosome.templates[3][0].matched_lines), 1)
 
     def test_generate_100cov_chromosome(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', [])
         chromosome = chrom_gen.generate_100cov_chromosome()
         for key in chrom_gen.messages.keys():
             match_lines = set()
