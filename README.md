@@ -23,7 +23,7 @@ MoLFI applies the following steps:
 1. Run NSGA-II algorithm.
 1. Post-processing: apply corrections to the resulting solutions.
 
-MoLFI is implemented as a python project (v3.6.0).
+MoLFI is implemented as a python project (v3.6+).
 
 This package contains the source code of the tool with two executable scripts.
 
@@ -44,11 +44,10 @@ To run MoLFI on a single log file:
 
 - from the command line, run the MoLFI.py script and precise the following arguments:
 *  -l : specify the log file
-*  -s : specify the separator of the log file contents (e.g. a comma, a tab character)
-*  -c : precise the position of the log messages in the log file (e.g. 3 for third column)
+*  -f : specify the log format (e.g., "<timestamp> <level> <message>")
 *  -p : specify where to save the generated templates.
 *  -r : provide the regular expressions if any (one after the other, separated by a normal space)
 
 Example:
 
-python3.6 MoLFI.py -l ../MoLFI_experiments/Datasets/BGL/2K/BGL_2K_log_messages.txt -s "\n" -c 0 -p templates.pkl -r "core\.[0-9]*" "0x([a-zA-Z]|[0-9])+"
+python3 MoLFI.py -l ../MoLFI_experiments/Datasets/BGL/2K/BGL_2K_log_messages.txt -f "<message>" -p templates.pkl -r "core\.[0-9]*" "0x([a-zA-Z]|[0-9])+"
