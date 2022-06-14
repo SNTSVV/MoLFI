@@ -1,11 +1,9 @@
-# MoLFI 
-Multi-objective Log message Format Identification
+# MoLFI (Multi-objective Log message Format Identification)
 
 MoLFI is a tool implementing a search-based approach to solve the problem of log message format identification.
 More details on this approach is available in this paper:
 
 > Salma Messaoudi, Annibale Panichella, Domenico Bianculli, Lionel Briand, and Raimondas Sasnauskas. __A Search-based Approach for Accurate Identification of Log Message Formats__. In Proceedings of ICPC ’18: 26th IEEE/ACM International Conference on Program Comprehension (ICPC ’18).  Available online at http://hdl.handle.net/10993/35286
-
 
 A log message template is a two parts message; one fixed and one variable.
 
@@ -52,3 +50,7 @@ Example:
 ```shell script
 python3 MoLFI.py -l ../MoLFI_experiments/Datasets/BGL/2K/BGL_2K_log_messages.txt -f "<message>" -p templates.pkl -r "core\.[0-9]*" "0x([a-zA-Z]|[0-9])+"
 ```
+
+# Licensing
+
+MoLFI is © 2018-2022 University of Luxembourg and licensed under the Apache license. See `LICENSE.txt` for more details.
