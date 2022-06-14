@@ -8,7 +8,7 @@ class Test(unittest.TestCase):
 
     def test_constructor(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', [])
         obj2_d = Objective2D(chrom_gen)
         self.assertEqual(len(obj2_d.get_messages()), 15)
 
@@ -21,14 +21,14 @@ class Test(unittest.TestCase):
         chromosome.add_template(t)
         # let's read the messages
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', [])
         obj2_d = Objective2D(chrom_gen)
         # assertion section
         self.assertEqual(obj2_d.compute_objective(chromosome), [1.0, 0])
 
     def test_star_template(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', [])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', [])
 
         t = Template(["*", "*", "*"])
         compute_matched_lines(chrom_gen.messages, t)
@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
 
     def test_compute_objective(self):
         logfile = ROOT_DIR + '/test/resources/File.log'
-        chrom_gen = ChromosomeGenerator(logfile, 0, '\n', ["'[\w\d\$\-:,\./_ ><\|]*'"])
+        chrom_gen = ChromosomeGenerator(logfile, '<message>', ["'[\w\d\$\-:,\./_ ><\|]*'"])
 
         template1 = ["Message", "sent", "by", "*", ",", "at", "port", "*"]
         template2 = ["generating", "reading", "files"]

@@ -1,18 +1,16 @@
+import pandas as pd
 import random
 import re
-import hashlib
-from contextlib import suppress
-from itertools import chain
 from random import randint
 from typing import List
 
 from numpy.core.defchararray import startswith
 from main.org.core.chromosome.chromosome import Chromosome
 from main.org.core.chromosome.template import Template
-from main.org.core.utility.chromosome_corrections import check_variable_parts
 from main.org.core.utility.log_message_adaptation import adapt_log_message
 from main.org.core.utility.match_utility import compute_matched_lines
 from main.org.core.utility.message import Message
+from main.org.core.utility.log_file_reader import load_logs_into_df
 
 
 class ChromosomeGenerator:
@@ -20,49 +18,37 @@ class ChromosomeGenerator:
     starting from the messages in the log file under analysis
     """
 
-    def __init__(self, path: str, column_index: int, separator: str, regex: List[str]):
+    def __init__(self, path: str, log_format: str, regex: List[str]):
         """ Constructor that takes the path to the log file as input
         and saves the content of the file as a list of strings
         each item in the list correspond to a line in the log file
         :param path: path to log file
-        :param column_index: the column of messages
-        :param separator: separator between columns
+        :param pattern: log line pattern (e.g., <date> <message>)
         """
         self.messages = {}
-        self.parse_messages(path, column_index, separator, regex, True)
+        self.parse_messages(path, log_format, regex)
 
     """============================================================================"""
 
-    def parse_messages(self, path: str, column_index: int, separator: str, regex: List[str], unique_messages: bool):
+    def parse_messages(self, path: str, log_format: str, regex: List[str]):
         """ Constructor that takes the path to the log file as input
         and saves the content of the file as a list of strings
         each item in the list correspond to a line in the log file
-        :param regex: list of regular expressions used to detect trivial values
         :param path: path to log file
-        :param column_index: the column of messages
-        :param separator: separator between columns
+        :param log_format: log format (e.g., <date> <message>)
+        :param regex: list of regular expressions used to detect trivial values
         """
         # print("Starting parsing the log")
-        if unique_messages:
-            columns = set()
-            with open(path) as f_read:
-                for line in f_read:
-                    line_columns = line.split(separator)
-                    if len(line_columns) > column_index:
-                        column = line_columns[column_index]
-                        new_msg = adapt_log_message(column, regex=regex)
-                        string = new_msg.to_string()
-                        if not columns.__contains__(string):
-                            self.load_log_message(new_msg)
-                            columns.add(string)
-        else:
-            with open(path) as f_read:
-                for line in f_read:
-                    line_columns = line.split(separator)
-                    if len(line_columns) > column_index:
-                        column = line_columns[column_index]
-                        new_msg = adapt_log_message(column, regex=regex)
-                        self.load_log_message(new_msg)
+        logs_df = load_logs_into_df(log_format=log_format, log_files=[path])
+
+        columns = set()
+        for index, row in logs_df.iterrows():
+            new_msg = adapt_log_message(row['message'], regex=regex)
+            string = new_msg.to_string()
+            if not columns.__contains__(string):
+                self.load_log_message(new_msg)
+                columns.add(string)
+
         # print("Finished parsing the log")
 
     """============================================================================"""

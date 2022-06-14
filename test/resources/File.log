@@ -1,0 +1,20 @@
+generating reading files
+Message sent by 'AAA', at port 50
+Message sent by 'CCC', at port 3
+Message sent by 'EEE', at port 1
+Start core code
+target : script.sh
+App : XYZ
+KERNEL    : 5434567
+Server stop process file: config.txt
+Server start process from client ABC
+App : XYZ
+TLB    : BCD
+KERNEL    : 123
+STOP : path/to/server
+STOP : path/to/server
+generating reading files
+Server launch app from file id /path/to/file.txt
+generating reading files
+Message sent by 'DDD', at port 2
+Message sent by 'BBB', at port 50
