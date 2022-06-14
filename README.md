@@ -54,3 +54,10 @@ python3 MoLFI.py -l ../MoLFI_experiments/Datasets/BGL/2K/BGL_2K_log_messages.txt
 # Licensing
 
 MoLFI is © 2018-2022 University of Luxembourg and licensed under the Apache license. See `LICENSE.txt` for more details.
+
+# Requirements
+
+As listed in `requirements.txt`, MoLFI needs to install the following python libraries:
+- [deap](https://github.com/DEAP/deap) (licensed under [LPGL](https://github.com/DEAP/deap/blob/master/LICENSE.txt))
+- [numpy](https://github.com/numpy/numpy) (licensed under [BSD](https://github.com/numpy/numpy/blob/main/LICENSE.txt))
+- [pandas](https://github.com/pandas-dev/pandas) (licensed under [BSD](https://github.com/pandas-dev/pandas/blob/main/LICENSE))
